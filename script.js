@@ -40,7 +40,7 @@ class UI {
             productElement.innerHTML = `
                 <p>${product.name}</p>
                 <img src="${product.imageURL}" alt="${product.name}" />
-                <p>${product.price}</p>
+                <p>Price: ${product.price}</p>
                 <label for="quantity${product.id}">Qty:</label>
                 <input type="number" id="quantity${product.id}" name="quantity" min="1" max="5">
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
