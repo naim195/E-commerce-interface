@@ -75,11 +75,24 @@ let products = [
 ];
 
 function addToCart(productId) {
-    const quantity = document.getElementById(`quantity${productId}`).value;
-    const productToAdd = products.find(product => product.id === productId);
-    app.shoppingCart.addItem(productToAdd, quantity);
-    app.ui.displayCart(app.shoppingCart);
+    const quantityInput = document.getElementById(`quantity${productId}`);
+    
+    if (!quantityInput) {
+        console.error(`Quantity input not found for product with ID ${productId}`);
+        return;
+    }
+
+    const quantity = parseInt(quantityInput.value);
+
+    if (!isNaN(quantity) && quantity > 0) {
+        const productToAdd = products.find(product => product.id === productId);
+        app.shoppingCart.addItem(productToAdd, quantity);
+        app.ui.displayCart(app.shoppingCart);
+    } else {
+        alert('Please enter a valid quantity.');
+    }
 }
+
 
 class App {
     constructor() {
@@ -91,7 +104,6 @@ class App {
     init() {
         this.ui.displayProducts(this.prodList);
         this.ui.displayCart(this.shoppingCart);
-        // Other initialization logic
     }
 }
 
