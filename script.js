@@ -39,8 +39,8 @@ class UI {
             const productElement = document.createElement('div');
             productElement.innerHTML = `
                 <p>${product.name}</p>
-                <img src="${product.imageURL}" alt="${product.name}" />
-                <p>Price: ${product.price}</p>
+                <img src="${product.imgURL}" alt="${product.name}" />
+                <p>Price: \$${product.price}</p>
                 <label for="quantity${product.id}">Qty:</label>
                 <input type="number" id="quantity${product.id}" name="quantity" min="1" max="5">
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
@@ -69,9 +69,12 @@ class UI {
 }
 
 let products = [
-    new Product('Product 1', 1, 100, 'assets/ab-testing.svg'),
-    new Product('Product 2', 2, 200, 'assets/ab-testing.svg'),
-    // Add more products as needed
+    new Product('Monitor', 1, 200, 'assets/ab-testing.png'),
+    new Product('RTX 4090', 2, 1500, 'assets/ab-testing.svg'),
+    new Product('AMD Ryzen 9 5900X', 2, 400, 'assets/ab-testing.svg'),
+    new Product('Motherboard', 2, 200, 'assets/ab-testing.svg'),
+    new Product('Keyboard', 2, 50, 'assets/ab-testing.svg'),
+    new Product('Mouse', 2, 10, 'assets/ab-testing.svg'),
 ];
 
 function addToCart(productId) {

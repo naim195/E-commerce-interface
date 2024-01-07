@@ -1,6 +1,6 @@
 body {
-    background-color: #000;
-    color: #fff;
+    background-color: #fff;
+    color: #000;
     font-family: Arial, sans-serif;
 }
 
@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    background-color: #333;
+    background-color: #eee; /* Light grey */
 }
 
 .container {
@@ -17,20 +17,25 @@ body {
     padding: 20px;
 }
 
+.cart{
+    background-color: aqua;
+}
+
 .items, .cart {
     width: 45%;
-    border: 1px solid #555;
+    border: 1px solid #ddd; /* Lighter grey */
     padding: 20px;
+    
 }
 
 .items div, .cart div {
-    border: 1px solid #777;
+    border: 1px solid #ccc; /* Light grey */
     margin-bottom: 20px;
     padding: 10px;
 }
 
 button {
-    background-color: #008CBA; /* Blue */
+    background-color: #FFA500; /* Orange */
     border: none;
     color: white;
     padding: 15px 32px;
