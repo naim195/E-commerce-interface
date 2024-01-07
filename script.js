@@ -22,11 +22,11 @@ class shoppingCart{
     }
 
     removeItem(prodID){
-
+        this.items = this.items.filter(item => item.product.id !== prodID);
     }
 
     calcTotal(){
-
+        return this.items.reduce((total, item) => total + item.product.price * item.qty, 0);
     }
 
 }
@@ -41,31 +41,30 @@ class UI {
                 <p>${product.name}</p>
                 <img src="${product.imageURL}" alt="${product.name}" />
                 <p>${product.price}</p>
-                <input type=""
-                <label for="quantity">Qty:</label>
-                <input type="number" id="quantity" name="quantity" min="1" max="5">
+                <label for="quantity${product.id}">Qty:</label>
+                <input type="number" id="quantity${product.id}" name="quantity" min="1" max="5">
                 <button onclick="addToCart(${product.id})">Add to Cart</button>
             `;
             productListContainer.appendChild(productElement);
         });
-
     }
+
   
     displayCart(cart) {
-        const cartContainer=document.querySelector('.cart');
-
-        cartContainer.innerHTML=`
-        <div class="cart-title">Shopping cart</div>
-        <div class="amount">Total: ${cart.total}</div>
-        <div>Items bought</div>`;
-
-        const cartItems=document.querySelectorAll('cart-item');
-        cartItems.forEach(item=>{
-            item.innerHTML=`
-                <p>${item.name}- ${item.qty}`;
-            cartContainer.appendChild(item)
-        });      
-    }
+        const cartContainer = document.querySelector('.cart');
+    
+        cartContainer.innerHTML = `
+            <div class="cart-title">Shopping cart</div>
+            <div class="amount">Total: ${cart.calcTotal()}</div>
+            <div>Items bought</div>
+        `;
+    
+        cart.items.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.innerHTML = `<p>${item.product.name} - ${item.qty}</p>`;
+            cartContainer.appendChild(cartItem);
+        });
+    }    
   
 }
 
@@ -74,6 +73,13 @@ let products = [
     new Product('Product 2', 2, 200, 'assets/ab-testing.svg'),
     // Add more products as needed
 ];
+
+function addToCart(productId) {
+    const quantity = document.getElementById(`quantity${productId}`).value;
+    const productToAdd = products.find(product => product.id === productId);
+    app.shoppingCart.addItem(productToAdd, quantity);
+    app.ui.displayCart(app.shoppingCart);
+}
 
 class App {
     constructor() {
